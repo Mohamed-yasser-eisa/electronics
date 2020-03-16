@@ -1,8 +1,8 @@
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     1
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02
-OBJECT MODULE PLACED IN task1.OBJ
+NO OBJECT MODULE REQUESTED
 ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE task1.asm XR GEN DB EP NOMOD51 INCDIR(C:\SiLabs\MCU\Inc) 
 
 LOC  OBJ            LINE     SOURCE
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
   00AA          +1    56     ADC1CN  DATA  0AAH   ; ADC 1 CONTROL
   00AB          +1    57     ADC1CF   DATA  0ABH   ; ADC 1 ANALOG MUX CONFIGURATION
   00AC          +1    58     AMX1SL   DATA  0ACH   ; ADC 1 ANALOG MUX CHANNEL SELECT
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     2
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     2
 
   00AD          +1    59     P3IF     DATA  0ADH   ; PORT 3 EXTERNAL INTERRUPT FLAGS
   00AE          +1    60     SADEN1   DATA  0AEH   ; SERIAL PORT 1 SLAVE ADDRESS MASK
@@ -133,7 +133,7 @@ LOC  OBJ            LINE     SOURCE
   00F0          +1   122     B        DATA  0F0H   ; B REGISTER
   00F1          +1   123     SCON1    DATA  0F1H   ; SERIAL PORT 1 CONTROL
   00F2          +1   124     SBUF1    DATA  0F2H   ; SERAIL PORT 1 DATA
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     3
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     3
 
   00F3          +1   125     SADDR1   DATA  0F3H   ; SERAIL PORT 1 
   00F4          +1   126     TL4      DATA  0F4H   ; TIMER 4 DATA - LOW BYTE
@@ -201,7 +201,7 @@ LOC  OBJ            LINE     SOURCE
                 +1   188     ; T2CON C8H
   00C8          +1   189     CPRL2    BIT   T2CON.0 ; CAPTURE OR RELOAD SELECT
   00C9          +1   190     CT2      BIT   T2CON.1 ; TIMER OR COUNTER SELECT
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     4
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     4
 
   00CA          +1   191     TR2      BIT   T2CON.2 ; TIMER 2 ON/OFF CONTROL
   00CB          +1   192     EXEN2    BIT   T2CON.3 ; TIMER 2 EXTERNAL ENABLE FLAG
@@ -252,78 +252,111 @@ LOC  OBJ            LINE     SOURCE
 0000 75FFDE          237     MOV WDTCN,#0DEh
 0003 75FFAD          238     MOV WDTCN,#0ADh
   0100               239     TABLE EQU 100H
-0000                 240     ORG 0000H
+                     240        
                      241     
-0000                 242     main:
-0000 900100          243     MOV DPTR,#TABLE
-0003 110D            244     CALL onGreen
-0005 1119            245     CALL onYellow
-0007 1123            246     CALL onRed
-0009 112D            247     CALL off
-000B 80F3            248     JMP main
-                     249     
-                     250     
-000D                 251     onGreen: ;fuction turn on green LED
-000D 758001          252                     MOV P0,#1 ;turn on LED
-0010 7B1E            253                     MOV R3,#30 ; for 30 sec counter
-0012 7400            254                     MOV A,#00
-0014                 255     counter1:
-0014 1131            256                     CALL delay ;delay for 1 sec & output in 7 segment
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     5
+0000                 242     ORG 0000H
+                     243     
+0000                 244     main:
+                     245     
+0000 900100          246     MOV DPTR,#TABLE
+                     247     
+0003 110D            248     CALL onGreen                    ;fuction turn on green LED
+0005 1121            249     CALL onYellow                   ;fuction turn on yello LED
+0007 112B            250     CALL onRed                              ;fuction turn on red LED
+0009 1135            251     CALL off                                        ;fuction turn off all LEDs
+                     252     
+000B 80F3            253     JMP main
+                     254     
+                     255     
+000D                 256     onGreen: 
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     5
 
-                     257                     ; 7 segment code
-0016 DBFC            258                     DJNZ R3,counter1 
-0018 22              259                     RET
-                     260     
-0019                 261     onYellow:
-0019 75900A          262             MOV P1,#00000010
-001C 7C1E            263             MOV R4,#30
-001E                 264     counter2:
-001E 1131            265             CALL delay
-0020 DCFC            266             DJNZ R4,counter2
-0022 22              267             RET
+000D 758001          257                     MOV P0,#1 ;turn on green LED
+                     258                     
+0010 7900            259                     MOV R1,#00 ; COUNTER
+0012 E9              260                     MOV A,R1
+0013 75F00A          261                     MOV B,#10
+0016 84              262                     DIV AB
+0017                 263                     ADD A,DPTR
+*** _______________________________________________^
+*** ERROR #A40 IN 263 (task1.asm, LINE 28): INVALID REGISTER
+0017                 264                     MOV P2,@A  ;The Quotient of division (left segment)
+*** ________________________________________________^
+*** _________________________________________________^
+*** ____________________________________________________^
+*** ERROR #A9 IN 264 (task1.asm, LINE 29): SYNTAX ERROR
+*** ERROR #A9 IN 264 (task1.asm, LINE 29): SYNTAX ERROR
+*** ERROR #A9 IN 264 (task1.asm, LINE 29): SYNTAX ERROR
+0017 E5F0            265                     MOV A,B
+0019                 266                     ADD A,DPTR
+*** _______________________________________________^
+*** ERROR #A40 IN 266 (task1.asm, LINE 31): INVALID REGISTER
+0019                 267                     MOV P1,@A  ;The Remainder of division (right segment)
+*** ________________________________________________^
+*** _________________________________________________^
+*** ____________________________________________________^
+*** ERROR #A9 IN 267 (task1.asm, LINE 32): SYNTAX ERROR
+*** ERROR #A9 IN 267 (task1.asm, LINE 32): SYNTAX ERROR
+*** ERROR #A9 IN 267 (task1.asm, LINE 32): SYNTAX ERROR
                      268     
-0023                 269     onRed:
-0023 759064          270     MOV P1,#00000100
-0026 7D1E            271             MOV R5,#30
-0028                 272     counter3:
-0028 1131            273             CALL delay
-002A DDFC            274             DJNZ R5,counter3
-002C 22              275             RET
-                     276     
-002D                 277     off:
-002D 758000          278     MOV P0,#00000000 ;turn off all LEDs
-0030 22              279     RET
-                     280     
-                     281     
-                     282     ; delay = 1 sec
-0031                 283     delay:
-0031 7886            284     MOV R0,#134
-0033 7992            285     MOV R1,#146
-0035 7A07            286     MOV R2,#7
-0037 D8FE            287     loop2:DJNZ R0,loop2
-0039 D9FC            288                             DJNZ R1,loop2
-003B DAFA            289                       DJNZ R2,loop2
-                     290     
-003D 22              291     RET
-                     292     
-0100                 293     ORG TABLE
-0100 00              294     DB 00000000B  ; Binary of 0
-0101 01              295     DB 00000001B    ;1
-0102 02              296     DB 00000010B    ;2
-0103 03              297     DB 00000011B    ;3
-0104 04              298     DB 00000100B    ;4
-0105 05              299     DB 00000101B    ;5
-0106 06              300     DB 00000110B    ;6
-0107 07              301     DB 00000111B    ;7
-0108 08              302     DB 00001000B    ;8
-0109 09              303     DB 00001001B    ;9
-010A 0A              304     DB 00001010B    ;10
+0019 781E            269                     MOV R0,#30 ;for 30 second counter
+001B                 270     counter1:
+001B 1139            271                     CALL delay ;delay for 1 sec
+001D 09              272                     INC R1
+001E D8FB            273                     DJNZ R0,counter1 
+0020 22              274                     RET
+                     275     
+0021                 276     onYellow:
+0021 75900A          277             MOV P1,#00000010
+0024 7C1E            278             MOV R4,#30
+0026                 279     counter2:
+0026 1139            280             CALL delay
+0028 DCFC            281             DJNZ R4,counter2
+002A 22              282             RET
+                     283     
+002B                 284     onRed:
+002B 759064          285     MOV P1,#00000100
+002E 7D1E            286             MOV R5,#30
+0030                 287     counter3:
+0030 1139            288             CALL delay
+0032 DDFC            289             DJNZ R5,counter3
+0034 22              290             RET
+                     291     
+0035                 292     off:
+0035 758000          293     MOV P0,#00000000 ;turn off all LEDs
+0038 22              294     RET
+                     295     
+                     296     
+                     297     ; delay = 1 sec
+0039                 298     delay:
+0039 7E86            299     MOV R6,#134
+003B 7F92            300     MOV R7,#146
+003D 7A07            301     MOV R2,#7
+003F DEFE            302     loop2:DJNZ R6,loop2
+0041 DFFC            303                             DJNZ R7,loop2
+0043 DAFA            304                       DJNZ R2,loop2
                      305     
-                     306     
+0045 22              306     RET
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     6
+
                      307     
-                     308     END
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     6
+0100                 308     ORG TABLE
+0100 3F              309     DB 3FH  ;0
+0101 06              310     DB 06H  ;1
+0102 5B              311     DB 5BH  ;2
+0103 4F              312     DB 4FH  ;3
+0104 66              313     DB 66H  ;4
+0105 6D              314     DB 6DH  ;5
+0106 7D              315     DB 7DH  ;6
+0107 07              316     DB 07H  ;7
+0108 7F              317     DB 7FH  ;8
+0109 6F              318     DB 6FH  ;9
+                     319     
+                     320     
+                     321     
+                     322     
+                     323     END
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     7
 
 XREF SYMBOL TABLE LISTING
 ---- ------ ----- -------
@@ -356,7 +389,7 @@ ADC1CN . . . . . .  D ADDR   00AAH   A      56#
 AMX0CF . . . . . .  D ADDR   00BAH   A      70#
 AMX0SL . . . . . .  D ADDR   00BBH   A      71#
 AMX1SL . . . . . .  D ADDR   00ACH   A      58#
-B. . . . . . . . .  D ADDR   00F0H   A      122#
+B. . . . . . . . .  D ADDR   00F0H   A      122# 261 265
 CCF0 . . . . . . .  B ADDR   00D8H.0 A      209#
 CCF1 . . . . . . .  B ADDR   00D8H.1 A      210#
 CCF2 . . . . . . .  B ADDR   00D8H.2 A      211#
@@ -364,9 +397,9 @@ CCF3 . . . . . . .  B ADDR   00D8H.3 A      212#
 CCF4 . . . . . . .  B ADDR   00D8H.4 A      213#
 CF . . . . . . . .  B ADDR   00D8H.7 A      215#
 CKCON. . . . . . .  D ADDR   008EH   A      30#
-COUNTER1 . . . . .  C ADDR   0014H   A      255# 258
-COUNTER2 . . . . .  C ADDR   001EH   A      264# 266
-COUNTER3 . . . . .  C ADDR   0028H   A      272# 274
+COUNTER1 . . . . .  C ADDR   001BH   A      270# 273
+COUNTER2 . . . . .  C ADDR   0026H   A      279# 281
+COUNTER3 . . . . .  C ADDR   0030H   A      287# 289
 CPRL2. . . . . . .  B ADDR   00C8H.0 A      189#
 CPT0CN . . . . . .  D ADDR   009EH   A      45#
 CPT1CN . . . . . .  D ADDR   009FH   A      46#
@@ -379,7 +412,7 @@ DAC0L. . . . . . .  D ADDR   00D2H   A      93#
 DAC1CN . . . . . .  D ADDR   00D7H   A      98#
 DAC1H. . . . . . .  D ADDR   00D6H   A      97#
 DAC1L. . . . . . .  D ADDR   00D5H   A      96#
-DELAY. . . . . . .  C ADDR   0031H   A      256 265 273 283#
+DELAY. . . . . . .  C ADDR   0039H   A      271 280 288 298#
 DPH. . . . . . . .  D ADDR   0083H   A      19#
 DPL. . . . . . . .  D ADDR   0082H   A      18#
 EA . . . . . . . .  B ADDR   00A8H.7 A      169#
@@ -391,7 +424,7 @@ EMI0CF . . . . . .  D ADDR   00A3H   A      49#
 EMI0CN . . . . . .  D ADDR   00AFH   A      61#
 EMI0TC . . . . . .  D ADDR   00A1H   A      48#
 ENSMB. . . . . . .  B ADDR   00C0H.6 A      186#
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     7
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     8
 
 ES . . . . . . . .  B ADDR   00A8H.4 A      167#
 ET0. . . . . . . .  B ADDR   00A8H.1 A      164#
@@ -411,24 +444,24 @@ IE1. . . . . . . .  B ADDR   0088H.3 A      146#
 IP . . . . . . . .  D ADDR   00B8H   A      68# 172 173 174 175 176 177
 IT0. . . . . . . .  B ADDR   0088H.0 A      143#
 IT1. . . . . . . .  B ADDR   0088H.2 A      145#
-LOOP2. . . . . . .  C ADDR   0037H   A      287# 287 288 289
-MAIN . . . . . . .  C ADDR   0000H   A      242# 248
+LOOP2. . . . . . .  C ADDR   003FH   A      302# 302 303 304
+MAIN . . . . . . .  C ADDR   0000H   A      244# 253
 MODF . . . . . . .  B ADDR   00F8H.5 A      233#
 MSTEN. . . . . . .  B ADDR   00F8H.1 A      229#
-OFF. . . . . . . .  C ADDR   002DH   A      247 277#
-ONGREEN. . . . . .  C ADDR   000DH   A      244 251#
-ONRED. . . . . . .  C ADDR   0023H   A      246 269#
-ONYELLOW . . . . .  C ADDR   0019H   A      245 261#
+OFF. . . . . . . .  C ADDR   0035H   A      251 292#
+ONGREEN. . . . . .  C ADDR   000DH   A      248 256#
+ONRED. . . . . . .  C ADDR   002BH   A      250 284#
+ONYELLOW . . . . .  C ADDR   0021H   A      249 276#
 OSCICN . . . . . .  D ADDR   00B2H   A      64#
 OSCXCN . . . . . .  D ADDR   00B1H   A      63#
 OV . . . . . . . .  B ADDR   00D0H.2 A      201#
 P. . . . . . . . .  B ADDR   00D0H.0 A      199#
-P0 . . . . . . . .  D ADDR   0080H   A      16# 252 278
+P0 . . . . . . . .  D ADDR   0080H   A      16# 257 293
 P0MDOUT. . . . . .  D ADDR   00A4H   A      50#
-P1 . . . . . . . .  D ADDR   0090H   A      32# 262 270
+P1 . . . . . . . .  D ADDR   0090H   A      32# 267 277 285
 P1MDIN . . . . . .  D ADDR   00BDH   A      73#
 P1MDOUT. . . . . .  D ADDR   00A5H   A      51#
-P2 . . . . . . . .  D ADDR   00A0H   A      47#
+P2 . . . . . . . .  D ADDR   00A0H   A      47# 264
 P2MDOUT. . . . . .  D ADDR   00A6H   A      52#
 P3 . . . . . . . .  D ADDR   00B0H   A      62#
 P3IF . . . . . . .  D ADDR   00ADH   A      59#
@@ -459,7 +492,7 @@ PCA0L. . . . . . .  D ADDR   00E9H   A      115#
 PCA0MD . . . . . .  D ADDR   00D9H   A      100#
 PCON . . . . . . .  D ADDR   0087H   A      23#
 PS . . . . . . . .  B ADDR   00B8H.4 A      176#
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     8
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE     9
 
 PSCTL. . . . . . .  D ADDR   008FH   A      31#
 PSW. . . . . . . .  D ADDR   00D0H   A      91# 199 200 201 202 203 204 205 206
@@ -512,7 +545,7 @@ STA. . . . . . . .  B ADDR   00C0H.5 A      185#
 STO. . . . . . . .  B ADDR   00C0H.4 A      184#
 T2CON. . . . . . .  D ADDR   00C8H   A      84# 189 190 191 192 193 194 195 196
 T4CON. . . . . . .  D ADDR   00C9H   A      85#
-TABLE. . . . . . .  N NUMB   0100H   A      239# 243 293
+TABLE. . . . . . .  N NUMB   0100H   A      239# 246 308
 TB8. . . . . . . .  B ADDR   0098H.3 A      156#
 TCLK . . . . . . .  B ADDR   00C8H.4 A      193#
 TCON . . . . . . .  D ADDR   0088H   A      24# 143 144 145 146 147 148 149 150
@@ -527,7 +560,7 @@ TI . . . . . . . .  B ADDR   0098H.1 A      154#
 TL0. . . . . . . .  D ADDR   008AH   A      26#
 TL1. . . . . . . .  D ADDR   008BH   A      27#
 TL2. . . . . . . .  D ADDR   00CCH   A      88#
-A51 MACRO ASSEMBLER  TASK1                                                                03/16/2020 20:51:10 PAGE     9
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 00:00:58 PAGE    10
 
 TL4. . . . . . . .  D ADDR   00F4H   A      126#
 TMOD . . . . . . .  D ADDR   0089H   A      25#
@@ -550,4 +583,4 @@ XBR2 . . . . . . .  D ADDR   00E3H   A      109#
 REGISTER BANK(S) USED: 0 
 
 
-ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
+ASSEMBLY COMPLETE.  0 WARNING(S), 8 ERROR(S)
