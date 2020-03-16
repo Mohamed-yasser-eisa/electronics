@@ -1,0 +1,14 @@
+
+BL51 BANKED LINKER/LOCATER V6.22 - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
+"A:\SBME 3rd year\Bioecectronics\tasks\task1.obj"  TO "A:\SBME 3rd year\Bioecectronics\tasks\task1" RS(256) PL(68) PW(78) 
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 004FH BYTE ( 3%) *
+******************************************************************************
+
+>> 
+>> 
+>> 
+Program Size: data=8.0 xdata=0 code=267
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

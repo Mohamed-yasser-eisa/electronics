@@ -1,0 +1,58 @@
+$include (c8051F020.INC)
+MOV WDTCN,#0DEh
+MOV WDTCN,#0ADh
+TABLE EQU 100H
+ORG 0000H
+
+main:
+MOV DPTR,#TABLE
+CALL onGreen
+CALL onYellow
+CALL onRed
+CALL off
+JMP main
+
+
+onGreen: 
+		MOV P0,#1 ;turn on LED
+		MOV R3,#30 ; for 30 sec counter
+counter1:
+		CALL delay ;delay for 1 sec & output in 7 segment
+		DJNZ R3,counter1 
+		RET
+
+onYellow:
+	MOV P1,#00000010
+	MOV R4,#30
+counter2:
+	CALL delay
+	DJNZ R4,counter2
+	RET
+
+onRed:
+MOV P1,#00000100
+	MOV R5,#30
+counter3:
+	CALL delay
+	DJNZ R5,counter3
+	RET
+
+off:
+MOV P0,#00000000 ;turn off all LEDs
+RET
+
+
+; delay = 1 sec
+delay:
+MOV R0,#134
+MOV R1,#146
+MOV R2,#7
+loop2:DJNZ R0,loop2
+			DJNZ R1,loop2
+		  DJNZ R2,loop2
+
+RET
+
+
+
+END

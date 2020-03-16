@@ -1,0 +1,1 @@
+"A:\SBME 3rd year\Bioecectronics\tasks\task1.obj"  TO "A:\SBME 3rd year\Bioecectronics\tasks\task1" RS(256) PL(68) PW(78) 
