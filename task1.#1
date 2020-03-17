@@ -56,7 +56,7 @@ counter2:
 		MOV P2,A
 		;CALL delay ;delay for 1 sec
 		INC R1
-		DJNZ R0,counter1 
+		DJNZ R0,counter2 
 		RET
 
 onRed:
@@ -65,7 +65,7 @@ onRed:
 		MOV R1,#00 ; COUNTER for seconds
 		MOV R0,#30 ;for 30 second counter
 
-counter1:
+counter3:
 		MOV A,R1
 		MOV B,#10
 		DIV AB
@@ -76,7 +76,7 @@ counter1:
 		MOV P2,A
 		;CALL delay ;delay for 1 sec
 		INC R1
-		DJNZ R0,counter1 
+		DJNZ R0,counter3
 		RET
 
 off:

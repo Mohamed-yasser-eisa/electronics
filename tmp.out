@@ -8,13 +8,13 @@ ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE task1.asm XR GEN DB EP NOMOD51 INC
 
 LOC  OBJ            LINE     SOURCE
 
-005D 750015          327             MOV 0B2,#15H ; SETTING CLK TO 4MHZ
+0063 750015          327             MOV 0B2,#15H ; SETTING CLK TO 4MHZ
 *** ______________________________________^
 *** ERROR #A1 IN 327 (task1.asm, LINE 92): ILLEGAL CHARACTER IN NUMERIC CONSTANT
-0065 750016          332             MOV 0B2,#16H ; SETTING CLK TO 8MHZ
+006B 750016          332             MOV 0B2,#16H ; SETTING CLK TO 8MHZ
 *** ______________________________________^
 *** ERROR #A1 IN 332 (task1.asm, LINE 97): ILLEGAL CHARACTER IN NUMERIC CONSTANT
-006B 750017          336             MOV 0B2,#17H  ; SETTING CLK TO 16MHZ
+0071 750017          336             MOV 0B2,#17H  ; SETTING CLK TO 16MHZ
 *** ______________________________________^
 *** ERROR #A1 IN 336 (task1.asm, LINE 101): ILLEGAL CHARACTER IN NUMERIC CONSTANT
 

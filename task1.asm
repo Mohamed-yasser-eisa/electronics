@@ -34,7 +34,7 @@ counter1:
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
 		MOV P2,A
-		;CALL delay ;delay for 1 sec
+		CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter1 
 		RET
@@ -54,7 +54,7 @@ counter2:
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
 		MOV P2,A
-		;CALL delay ;delay for 1 sec
+		CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter2 
 		RET
@@ -74,7 +74,7 @@ counter3:
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
 		MOV P2,A
-		;CALL delay ;delay for 1 sec
+		CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter3
 		RET
@@ -102,15 +102,15 @@ CHOOSE_CLK:
 	RET
 
 ; delay = 1 sec
-;delay:
-;MOV R6,#134
-;MOV R7,#146
-;MOV R2,#7
-;loop2:DJNZ R6,loop2
-;			DJNZ R7,loop2
-;		  DJNZ R2,loop2
-
-;RET
+delay:
+			MOV R6,#134
+			MOV R7,#146
+			MOV R2,#7
+loop2:
+			DJNZ R6,loop2
+			DJNZ R7,loop2
+	  	DJNZ R2,loop2
+RET
 
 ORG TABLE
 DB 3FH	;0
