@@ -34,7 +34,7 @@ counter1:
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
 		MOV P2,A
-		;CALL delay ;delay for 1 sec
+		CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter1 
 		RET
@@ -54,7 +54,7 @@ counter2:
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
 		MOV P2,A
-		;CALL delay ;delay for 1 sec
+		CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter2 
 		RET
@@ -74,7 +74,7 @@ counter3:
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
 		MOV P2,A
-		;CALL delay ;delay for 1 sec
+		CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter3
 		RET
@@ -94,7 +94,11 @@ CHOOSE_CLK:
 	READS2: 
 	RRC A
 	JC READS3
+<<<<<<< HEAD
 	MOV 0B2H,#16H ; SETTING CLK TO 8MHZ
+=======
+	MOV 0B2,#16H ; SETTING CLK TO 8MHZ
+>>>>>>> 41519c9de32cfe10af4945a7f9fefab943922643
 	READS3: 
 	RRC A
 	JC READS
@@ -103,6 +107,7 @@ CHOOSE_CLK:
 
 ; delay = 1 sec
 delay:
+<<<<<<< HEAD
 MOV R6,#134
 MOV R7,#146
 MOV R2,#7
@@ -110,6 +115,15 @@ loop2:DJNZ R6,loop2
 			DJNZ R7,loop2
 		  DJNZ R2,loop2
 
+=======
+			MOV R6,#134
+			MOV R7,#146
+			MOV R2,#7
+loop2:
+			DJNZ R6,loop2
+			DJNZ R7,loop2
+	  	DJNZ R2,loop2
+>>>>>>> 41519c9de32cfe10af4945a7f9fefab943922643
 RET
 
 ORG TABLE
