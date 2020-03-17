@@ -1,9 +1,9 @@
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     1
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02
-NO OBJECT MODULE REQUESTED
-ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE task1.asm XR GEN DB EP NOMOD51 INCDIR(C:\SiLabs\MCU\Inc) 
+OBJECT MODULE PLACED IN task1.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\a51.exe task1.asm XR GEN DB EP NOMOD51
 
 LOC  OBJ            LINE     SOURCE
 
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
   00AA          +1    56     ADC1CN  DATA  0AAH   ; ADC 1 CONTROL
   00AB          +1    57     ADC1CF   DATA  0ABH   ; ADC 1 ANALOG MUX CONFIGURATION
   00AC          +1    58     AMX1SL   DATA  0ACH   ; ADC 1 ANALOG MUX CHANNEL SELECT
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     2
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     2
 
   00AD          +1    59     P3IF     DATA  0ADH   ; PORT 3 EXTERNAL INTERRUPT FLAGS
   00AE          +1    60     SADEN1   DATA  0AEH   ; SERIAL PORT 1 SLAVE ADDRESS MASK
@@ -133,7 +133,7 @@ LOC  OBJ            LINE     SOURCE
   00F0          +1   122     B        DATA  0F0H   ; B REGISTER
   00F1          +1   123     SCON1    DATA  0F1H   ; SERIAL PORT 1 CONTROL
   00F2          +1   124     SBUF1    DATA  0F2H   ; SERAIL PORT 1 DATA
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     3
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     3
 
   00F3          +1   125     SADDR1   DATA  0F3H   ; SERAIL PORT 1 
   00F4          +1   126     TL4      DATA  0F4H   ; TIMER 4 DATA - LOW BYTE
@@ -201,7 +201,7 @@ LOC  OBJ            LINE     SOURCE
                 +1   188     ; T2CON C8H
   00C8          +1   189     CPRL2    BIT   T2CON.0 ; CAPTURE OR RELOAD SELECT
   00C9          +1   190     CT2      BIT   T2CON.1 ; TIMER OR COUNTER SELECT
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     4
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     4
 
   00CA          +1   191     TR2      BIT   T2CON.2 ; TIMER 2 ON/OFF CONTROL
   00CB          +1   192     EXEN2    BIT   T2CON.3 ; TIMER 2 EXTERNAL ENABLE FLAG
@@ -269,7 +269,7 @@ LOC  OBJ            LINE     SOURCE
                      254     
                      255     
 000F                 256     onGreen: 
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     5
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     5
 
 000F D292            257                     SETB P1.2 ;turn on green LED
 0011 7900            258                     MOV R1,#00 ; COUNTER for seconds
@@ -337,40 +337,34 @@ LOC  OBJ            LINE     SOURCE
                      320     
 0058                 321     CHOOSE_CLK:
                      322     
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     6
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     6
 
 0058                 323             READS: 
 0058 E580            324             MOV A,P0
 005A 13              325             RRC A
 005B 4005            326             JC READS2
-005D 750015          327             MOV 0B2,#15H ; SETTING CLK TO 4MHZ
-*** ______________________________________^
-*** ERROR #A1 IN 327 (task1.asm, LINE 92): ILLEGAL CHARACTER IN NUMERIC CONSTANT
+005D 75B215          327             MOV 0B2H,#15H ; SETTING CLK TO 4MHZ
 0060 80F6            328             JMP READS
 0062                 329             READS2: 
 0062 13              330             RRC A
 0063 4003            331             JC READS3
-0065 750016          332             MOV 0B2,#16H ; SETTING CLK TO 8MHZ
-*** ______________________________________^
-*** ERROR #A1 IN 332 (task1.asm, LINE 97): ILLEGAL CHARACTER IN NUMERIC CONSTANT
+0065 75B216          332             MOV 0B2H,#16H ; SETTING CLK TO 8MHZ
 0068                 333             READS3: 
 0068 13              334             RRC A
 0069 40ED            335             JC READS
-006B 750017          336             MOV 0B2,#17H  ; SETTING CLK TO 16MHZ
-*** ______________________________________^
-*** ERROR #A1 IN 336 (task1.asm, LINE 101): ILLEGAL CHARACTER IN NUMERIC CONSTANT
+006B 75B217          336             MOV 0B2H,#17H  ; SETTING CLK TO 16MHZ
 006E 22              337             RET
                      338     
                      339     ; delay = 1 sec
-                     340     ;delay:
-                     341     ;MOV R6,#134
-                     342     ;MOV R7,#146
-                     343     ;MOV R2,#7
-                     344     ;loop2:DJNZ R6,loop2
-                     345     ;                       DJNZ R7,loop2
-                     346     ;                 DJNZ R2,loop2
+006F                 340     delay:
+006F 7E86            341     MOV R6,#134
+0071 7F92            342     MOV R7,#146
+0073 7A07            343     MOV R2,#7
+0075 DEFE            344     loop2:DJNZ R6,loop2
+0077 DFFC            345                             DJNZ R7,loop2
+0079 DAFA            346                       DJNZ R2,loop2
                      347     
-                     348     ;RET
+007B 22              348     RET
                      349     
 0100                 350     ORG TABLE
 0100 3F              351     DB 3FH  ;0
@@ -388,7 +382,7 @@ LOC  OBJ            LINE     SOURCE
                      363     
                      364     
                      365     END
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     7
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     7
 
 XREF SYMBOL TABLE LISTING
 ---- ------ ----- -------
@@ -445,6 +439,7 @@ DAC0L. . . . . . .  D ADDR   00D2H   A      93#
 DAC1CN . . . . . .  D ADDR   00D7H   A      98#
 DAC1H. . . . . . .  D ADDR   00D6H   A      97#
 DAC1L. . . . . . .  D ADDR   00D5H   A      96#
+DELAY. . . . . . .  C ADDR   006FH   A      340#
 DPH. . . . . . . .  D ADDR   0083H   A      19#
 DPL. . . . . . . .  D ADDR   0082H   A      18#
 EA . . . . . . . .  B ADDR   00A8H.7 A      169#
@@ -455,9 +450,9 @@ EIP2 . . . . . . .  D ADDR   00F7H   A      129#
 EMI0CF . . . . . .  D ADDR   00A3H   A      49#
 EMI0CN . . . . . .  D ADDR   00AFH   A      61#
 EMI0TC . . . . . .  D ADDR   00A1H   A      48#
-ENSMB. . . . . . .  B ADDR   00C0H.6 A      186#
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     8
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     8
 
+ENSMB. . . . . . .  B ADDR   00C0H.6 A      186#
 ES . . . . . . . .  B ADDR   00A8H.4 A      167#
 ET0. . . . . . . .  B ADDR   00A8H.1 A      164#
 ET1. . . . . . . .  B ADDR   00A8H.3 A      166#
@@ -476,6 +471,7 @@ IE1. . . . . . . .  B ADDR   0088H.3 A      146#
 IP . . . . . . . .  D ADDR   00B8H   A      68# 172 173 174 175 176 177
 IT0. . . . . . . .  B ADDR   0088H.0 A      143#
 IT1. . . . . . . .  B ADDR   0088H.2 A      145#
+LOOP2. . . . . . .  C ADDR   0075H   A      344# 344 345 346
 MAIN . . . . . . .  C ADDR   0000H   A      244# 253
 MODF . . . . . . .  B ADDR   00F8H.5 A      233#
 MSTEN. . . . . . .  B ADDR   00F8H.1 A      229#
@@ -522,10 +518,10 @@ PCA0H. . . . . . .  D ADDR   00F9H   A      131#
 PCA0L. . . . . . .  D ADDR   00E9H   A      115#
 PCA0MD . . . . . .  D ADDR   00D9H   A      100#
 PCON . . . . . . .  D ADDR   0087H   A      23#
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE     9
+
 PS . . . . . . . .  B ADDR   00B8H.4 A      176#
 PSCTL. . . . . . .  D ADDR   008FH   A      31#
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE     9
-
 PSW. . . . . . . .  D ADDR   00D0H   A      91# 199 200 201 202 203 204 205 206
 PT0. . . . . . . .  B ADDR   00B8H.1 A      173#
 PT1. . . . . . . .  B ADDR   00B8H.3 A      175#
@@ -590,10 +586,10 @@ TH0. . . . . . . .  D ADDR   008CH   A      28#
 TH1. . . . . . . .  D ADDR   008DH   A      29#
 TH2. . . . . . . .  D ADDR   00CDH   A      89#
 TH4. . . . . . . .  D ADDR   00F5H   A      127#
+A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 17:45:08 PAGE    10
+
 TI . . . . . . . .  B ADDR   0098H.1 A      154#
 TL0. . . . . . . .  D ADDR   008AH   A      26#
-A51 MACRO ASSEMBLER  TASK1                                                                03/17/2020 15:40:26 PAGE    10
-
 TL1. . . . . . . .  D ADDR   008BH   A      27#
 TL2. . . . . . . .  D ADDR   00CCH   A      88#
 TL4. . . . . . . .  D ADDR   00F4H   A      126#
@@ -617,4 +613,4 @@ XBR2 . . . . . . .  D ADDR   00E3H   A      109#
 REGISTER BANK(S) USED: 0 
 
 
-ASSEMBLY COMPLETE.  0 WARNING(S), 3 ERROR(S)
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
