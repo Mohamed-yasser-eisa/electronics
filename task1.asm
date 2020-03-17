@@ -25,11 +25,11 @@ onGreen:
 		MOV A,R1
 		MOV B,#10
 		DIV AB
-		ADD A,DPTR
-		MOV P2,@A  ;The Quotient of division (left segment)
+		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
+		MOV P2,A
 		MOV A,B
-		ADD A,DPTR
-		MOV P1,@A  ;The Remainder of division (right segment)
+		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
+		MOV P1,A
 
 		MOV R0,#30 ;for 30 second counter
 counter1:
@@ -39,23 +39,47 @@ counter1:
 		RET
 
 onYellow:
-	MOV P1,#00000010
-	MOV R4,#30
+	MOV P1,#2 ;turn on yellow LED
+		
+		MOV R1,#00 ; COUNTER
+		MOV A,R1
+		MOV B,#10
+		DIV AB
+		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
+		MOV P2,A
+		MOV A,B
+		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
+		MOV P1,A
+
+		MOV R0,#30 ;for 30 second counter
 counter2:
-	CALL delay
-	DJNZ R4,counter2
-	RET
+		CALL delay ;delay for 1 sec
+		INC R1
+		DJNZ R0,counter2 
+		RET
 
 onRed:
-MOV P1,#00000100
-	MOV R5,#30
+		MOV P1,#3	 ;turn on red LED
+		
+		MOV R1,#00 ; COUNTER
+		MOV A,R1
+		MOV B,#10
+		DIV AB
+		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
+		MOV P2,A
+		MOV A,B
+		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
+		MOV P1,A
+
+		MOV R0,#30 ;for 30 second counter
 counter3:
-	CALL delay
-	DJNZ R5,counter3
-	RET
+		CALL delay ;delay for 1 sec
+		INC R1
+		DJNZ R0,counter3 
+		RET
 
 off:
-MOV P0,#00000000 ;turn off all LEDs
+MOV P0,#00 ;turn off all LEDs
 RET
 
 

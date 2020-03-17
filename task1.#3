@@ -2,8 +2,7 @@ $include (c8051F020.INC)
 MOV WDTCN,#0DEh
 MOV WDTCN,#0ADh
 TABLE EQU 100H
-COUNTER DATA 133H  ; counter
-MOV R1,COUNTER   
+   
 
 ORG 0000H
 
@@ -22,20 +21,20 @@ JMP main
 onGreen: 
 		MOV P0,#1 ;turn on green LED
 		
-		MOV @R1,#00 ; COUNTER
-		MOV A,@R1
+		MOV R1,#00 ; COUNTER
+		MOV A,R1
 		MOV B,#10
 		DIV AB
-		ADD A,DPTR
-		MOV P2,@A  ;The Quotient of division (left segment)
+		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
+		MOV P2,A
 		MOV A,B
-		ADD A,DPTR
-		MOV A,@A  ;The Remainder of division (right segment)
+		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
+		MOV P1,A
 
 		MOV R0,#30 ;for 30 second counter
 counter1:
 		CALL delay ;delay for 1 sec
-		INC @R1
+		INC R1
 		DJNZ R0,counter1 
 		RET
 

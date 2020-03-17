@@ -1,34 +1,14 @@
 
-A51 MACRO ASSEMBLER V8.02 - SN: Eval Version
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2008
-
-MACRO ASSEMBLER A51 V8.02
-NO OBJECT MODULE REQUESTED
-ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE task1.asm XR GEN DB EP NOMOD51 INCDIR(C:\SiLabs\MCU\Inc) 
-
-LOC  OBJ            LINE     SOURCE
-
-0017                 263                     ADD A,DPTR
-*** _______________________________________________^
-*** ERROR #A40 IN 263 (task1.asm, LINE 28): INVALID REGISTER
-0017                 264                     MOV P2,@A  ;The Quotient of division (left segment)
-*** ________________________________________________^
-*** _________________________________________________^
-*** ____________________________________________________^
-*** ERROR #A9 IN 264 (task1.asm, LINE 29): SYNTAX ERROR
-*** ERROR #A9 IN 264 (task1.asm, LINE 29): SYNTAX ERROR
-*** ERROR #A9 IN 264 (task1.asm, LINE 29): SYNTAX ERROR
-0019                 266                     ADD A,DPTR
-*** _______________________________________________^
-*** ERROR #A40 IN 266 (task1.asm, LINE 31): INVALID REGISTER
-0019                 267                     MOV P1,@A  ;The Remainder of division (right segment)
-*** ________________________________________________^
-*** _________________________________________________^
-*** ____________________________________________________^
-*** ERROR #A9 IN 267 (task1.asm, LINE 32): SYNTAX ERROR
-*** ERROR #A9 IN 267 (task1.asm, LINE 32): SYNTAX ERROR
-*** ERROR #A9 IN 267 (task1.asm, LINE 32): SYNTAX ERROR
+BL51 BANKED LINKER/LOCATER V6.22 - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
+"A:\SBME 3rd year\Bioecectronics\tasks\task1.obj"  TO "A:\SBME 3rd year\Bioecectronics\tasks\task1" RS(256) PL(68) PW(78) 
 
-ASSEMBLY COMPLETE.  0 WARNING(S), 8 ERROR(S)
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 007CH BYTE ( 6%) *
+******************************************************************************
 
-ASSEMBLY COMPLETE.  0 WARNING(S), 8 ERROR(S)
+>> 
+>> 
+>> 
+Program Size: data=8.0 xdata=0 code=266
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
