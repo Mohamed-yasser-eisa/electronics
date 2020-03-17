@@ -19,7 +19,7 @@ JMP main
 
 
 onGreen: 
-		SETB P1.2 ;turn on green LED
+		MOV P1,#4 ;turn on green LED
 		MOV R1,#00 ; COUNTER for seconds
 		MOV R0,#30 ;for 30 second counter
 
@@ -40,7 +40,7 @@ counter1:
 		RET
 
 onYellow:
-		SETB P1.1 ;turn on yellow LED
+		MOV P1,#2 ;turn on yellow LED
 		
 		MOV R1,#00 ; COUNTER for seconds
 		MOV R0,#30 ;for 30 second counter
@@ -60,7 +60,7 @@ counter2:
 		RET
 
 onRed:
-		SETB P1.0	 ;turn on red LED
+		MOV P1,#1	 ;turn on red LED
 		
 		MOV R1,#00 ; COUNTER for seconds
 		MOV R0,#30 ;for 30 second counter
@@ -113,16 +113,16 @@ loop2:
 RET
 
 ORG TABLE
-DB 3FH	;0
-DB 06H	;1
-DB 5BH	;2
-DB 4FH	;3
-DB 66H	;4
-DB 6DH	;5
-DB 7DH	;6
-DB 07H	;7
-DB 7FH	;8
-DB 6FH	;9
+		DB 3FH	;0
+		DB 06H	;1
+		DB 5BH	;2
+		DB 4FH	;3
+		DB 66H	;4
+		DB 6DH	;5
+		DB 7DH	;6
+		DB 07H	;7
+		DB 7FH	;8
+		DB 6FH	;9
 
 
 
