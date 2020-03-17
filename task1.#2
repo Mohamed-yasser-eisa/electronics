@@ -1,15 +1,15 @@
 $include (c8051F020.INC)
 MOV WDTCN,#0DEh
 MOV WDTCN,#0ADh
-TABLE EQU 100H
-   
+TABLE EQU 100H  ;look-up table for 7 segment
+MOV P0,#07H ; Initializing push button switches in OFF state.  
 
 ORG 0000H
 
 main:
 
 MOV DPTR,#TABLE
-
+CALL CHOOSE_CLK
 CALL onGreen			;fuction turn on green LED
 CALL onYellow			;fuction turn on yello LED
 CALL onRed				;fuction turn on red LED
@@ -19,88 +19,95 @@ JMP main
 
 
 onGreen: 
-		MOV P0,#1 ;turn on green LED
+		SETB P1.2 ;turn on green LED
+		MOV R1,#00 ; COUNTER for seconds
+		MOV R0,#30 ;for 30 second counter
+
+counter1:
+	
 		
-		MOV R1,#00 ; COUNTER
 		MOV A,R1
 		MOV B,#10
 		DIV AB
 		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
-		MOV P2,A
+		MOV P3,A
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
-		MOV P1,A
-
-		MOV R0,#30 ;for 30 second counter
-counter1:
-		CALL delay ;delay for 1 sec
+		MOV P2,A
+		;CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter1 
 		RET
 
 onYellow:
-	MOV P1,#2 ;turn on yellow LED
+		SETB P1.1 ;turn on yellow LED
 		
-		MOV R1,#00 ; COUNTER
+		MOV R1,#00 ; COUNTER for seconds
+		MOV R0,#30 ;for 30 second counter
+
+counter2:
 		MOV A,R1
 		MOV B,#10
 		DIV AB
 		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
-		MOV P2,A
+		MOV P3,A
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
-		MOV P1,A
-
-		MOV R0,#30 ;for 30 second counter
-counter1:
-		CALL delay ;delay for 1 sec
+		MOV P2,A
+		;CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter1 
 		RET
-counter2:
-	CALL delay
-	DJNZ R4,counter2
-	RET
 
 onRed:
-		MOV P1,#3	 ;turn on red LED
+		SETB P1.0	 ;turn on red LED
 		
-		MOV R1,#00 ; COUNTER
+		MOV R1,#00 ; COUNTER for seconds
+		MOV R0,#30 ;for 30 second counter
+
+counter1:
 		MOV A,R1
 		MOV B,#10
 		DIV AB
 		MOVC A,@A+DPTR  ;The Quotient of division (left segment)
-		MOV P2,A
+		MOV P3,A
 		MOV A,B
 		MOVC A,@A+DPTR  ;The Remainder of division (right segment)
-		MOV P1,A
-
-		MOV R0,#30 ;for 30 second counter
-counter1:
-		CALL delay ;delay for 1 sec
+		MOV P2,A
+		;CALL delay ;delay for 1 sec
 		INC R1
 		DJNZ R0,counter1 
 		RET
-counter3:
-	CALL delay
-	DJNZ R5,counter3
-	RET
 
 off:
-MOV P0,#00 ;turn off all LEDs
+MOV P1,#00 ;turn off all LEDs
 RET
 
+CHOOSE_CLK:
+
+	READS: MOV A,P0
+	RRC A
+	JC READS2
+	MOV 0B2,#15H ; SETTING CLK TO 4MHZ
+	JMP READS
+	READS2: RRC A
+	JC READS3
+	MOV 0B2,#16H ; SETTING CLK TO 8MHZ
+	READS3: RRCA
+	JC READS
+	MOV 0B2,#17H  ; SETTING CLK TO 16MHZ
+	RET
 
 ; delay = 1 sec
-delay:
-MOV R6,#134
-MOV R7,#146
-MOV R2,#7
-loop2:DJNZ R6,loop2
-			DJNZ R7,loop2
-		  DJNZ R2,loop2
+;delay:
+;MOV R6,#134
+;MOV R7,#146
+;MOV R2,#7
+;loop2:DJNZ R6,loop2
+;			DJNZ R7,loop2
+;		  DJNZ R2,loop2
 
-RET
+;RET
 
 ORG TABLE
 DB 3FH	;0

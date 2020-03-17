@@ -1,14 +1,23 @@
 
-BL51 BANKED LINKER/LOCATER V6.22 - SN: Eval Version
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
-"A:\SBME 3rd year\Bioecectronics\tasks\task1.obj"  TO "A:\SBME 3rd year\Bioecectronics\tasks\task1" RS(256) PL(68) PW(78) 
+A51 MACRO ASSEMBLER V8.02 - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2008
+
+MACRO ASSEMBLER A51 V8.02
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE task1.asm XR GEN DB EP NOMOD51 INCDIR(C:\SiLabs\MCU\Inc) 
+
+LOC  OBJ            LINE     SOURCE
+
+005D 750015          327             MOV 0B2,#15H ; SETTING CLK TO 4MHZ
+*** ______________________________________^
+*** ERROR #A1 IN 327 (task1.asm, LINE 92): ILLEGAL CHARACTER IN NUMERIC CONSTANT
+0065 750016          332             MOV 0B2,#16H ; SETTING CLK TO 8MHZ
+*** ______________________________________^
+*** ERROR #A1 IN 332 (task1.asm, LINE 97): ILLEGAL CHARACTER IN NUMERIC CONSTANT
+006B 750017          336             MOV 0B2,#17H  ; SETTING CLK TO 16MHZ
+*** ______________________________________^
+*** ERROR #A1 IN 336 (task1.asm, LINE 101): ILLEGAL CHARACTER IN NUMERIC CONSTANT
 
-******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 007CH BYTE ( 6%) *
-******************************************************************************
+ASSEMBLY COMPLETE.  0 WARNING(S), 3 ERROR(S)
 
->> 
->> 
->> 
-Program Size: data=8.0 xdata=0 code=266
-LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
+ASSEMBLY COMPLETE.  0 WARNING(S), 3 ERROR(S)
